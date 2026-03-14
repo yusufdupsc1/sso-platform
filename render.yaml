@@ -1,27 +1,23 @@
-{
-  "name": "sso-platform",
-  "region": " oregon",
-  "services": [
-    {
-      "name": "api",
-      "github": {
-        "repo": "yusufdupsc1/sso-platform",
-        "branch": "master",
-        "rootDir": "django"
-      },
-      "buildCommand": "pip install -r requirements.txt",
-      "startCommand": "gunicorn sso_platform.wsgi:application --bind 0.0.0.0:$PORT",
-      "envVars": [
-        {"key": "DATABASE_URL", "value": "postgres://postgres:postgres@db:5432/sso_platform"},
-        {"key": "DJANGO_SECRET", "generateValue": true},
-        {"key": "DEBUG", "value": "False"}
-      ],
-      "domains": ["api-sso-platform.onrender.com"]
-    },
-    {
-      "name": "db",
-      "service": "postgresql",
-      "version": "15"
-    }
-  ]
-}
+services:
+  - name: api
+    github:
+      repo: yusufdupsc1/sso-platform
+      branch: master
+      rootDir: django
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn sso_platform.wsgi:application --bind 0.0.0.0:$PORT
+    envVars:
+      - key: DATABASE_URL
+        value: postgres://postgres:postgres@db.railway.internal:5432/railway
+      - key: DJANGO_SECRET
+        value: dev-secret-change-in-production
+      - key: DEBUG
+        value: "False"
+    env:
+      - key: PYTHON_VERSION
+        value: "3.11"
+
+  - name: db
+    service: postgresql
+    version: "15"
+    plan: free
