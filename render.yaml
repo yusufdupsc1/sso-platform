@@ -1,22 +1,16 @@
+previewsEnabled: true
+
 services:
-  - type: web
-    name: api
-    github:
-      repo: yusufdupsc1/sso-platform
-      branch: master
-      deployPullRequests: "true"
+  - name: sso-api
+    type: web
+    region: oregon
+    repo: https://github.com/yusufdupsc1/sso-platform
+    branch: master
     rootDir: django
     buildCommand: pip install -r requirements.txt
     startCommand: gunicorn sso_platform.wsgi:application --bind 0.0.0.0:$PORT
     envVars:
-      - key: DATABASE_URL
-        value: postgres://postgres:postgres@db.railway.internal:5432/railway
       - key: DJANGO_SECRET
-        value: dev-secret-change-in-production
+        generateValue: true
       - key: DEBUG
         value: "False"
-
-  - type: pserv
-    name: db
-    service: postgresql
-    version: "15"
