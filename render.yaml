@@ -1,9 +1,11 @@
 services:
-  - name: api
+  - type: web
+    name: api
     github:
       repo: yusufdupsc1/sso-platform
       branch: master
-      rootDir: django
+      deployPullRequests: true
+    rootDir: django
     buildCommand: pip install -r requirements.txt
     startCommand: gunicorn sso_platform.wsgi:application --bind 0.0.0.0:$PORT
     envVars:
@@ -13,11 +15,8 @@ services:
         value: dev-secret-change-in-production
       - key: DEBUG
         value: "False"
-    env:
-      - key: PYTHON_VERSION
-        value: "3.11"
 
-  - name: db
+  - type: pserv
+    name: db
     service: postgresql
     version: "15"
-    plan: free
