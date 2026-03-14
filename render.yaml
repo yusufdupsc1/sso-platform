@@ -1,5 +1,4 @@
 previewsEnabled: true
-
 services:
   - name: sso-api
     type: web
