@@ -4,7 +4,7 @@ services:
     github:
       repo: yusufdupsc1/sso-platform
       branch: master
-      deployPullRequests: true
+      deployPullRequests: "true"
     rootDir: django
     buildCommand: pip install -r requirements.txt
     startCommand: gunicorn sso_platform.wsgi:application --bind 0.0.0.0:$PORT
