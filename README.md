@@ -1,42 +1,44 @@
 # SSO Platform
 
-Multi-tenant SSO authentication platform.
-
-## Project Structure
-
-```
-sso-platform/
-├── docker-compose.yml      # Full stack
-├── django/                # Django API
-│   ├── sso_platform/     # Django project
-│   ├── core/              # SSO logic
-│   └── requirements.txt
-└── frontend/             # Next.js (placeholder)
-```
+Multi-tenant SSO authentication platform built with Django.
 
 ## Features
 
-- Multi-tenant SSO
-- Multiple providers (Keycloak, Okta, Auth0, Azure AD)
-- OAuth2/OIDC
-- REST API
+- Multi-tenant SSO authentication.
+- Support for OIDC and OAuth2 providers (Keycloak, Okta, Auth0, Azure AD).
+- REST API for seamless integration.
+- Production-ready Docker configuration.
 
-## Quick Start
+## Project Structure
 
-```bash
-docker compose up -d
+```text
+.
+├── accounts/           # User management
+├── core/               # SSO core logic
+├── sso_platform/       # Project configuration (settings, WSGI, URLs)
+├── tests/              # Test suite
+├── Dockerfile          # Production Dockerfile
+├── docker-compose.yml  # Local development orchestration
+├── requirements.txt    # Production dependencies
+└── requirements-dev.txt# Development & CI dependencies
 ```
 
-## API Endpoints
+## Getting Started
 
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | /api/sso/initiate/ | Start SSO login |
-| POST | /api/sso/callback/ | Handle SSO callback |
+### Prerequisites
 
-## Tech Stack
+- Docker and Docker Compose
+- Environment variables (see `.env.example`)
 
-- Django 4.2
-- Django REST Framework
-- PostgreSQL
-- Docker
+### Local Development
+
+1. Clone the repository.
+2. Create a `.env` file from `.env.example`.
+3. Run the stack:
+   ```bash
+   docker-compose up
+   ```
+
+## Production Deployment
+
+See [DEPLOY.md](DEPLOY.md) for detailed production deployment instructions.
