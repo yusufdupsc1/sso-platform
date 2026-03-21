@@ -34,7 +34,8 @@ WORKDIR /app
 COPY --from=builder /root/.local /home/appuser/.local
 COPY . .
 
-EXPOSE 8000
+# Hugging Face requires listening on port 7860
+EXPOSE 7860
 
-# Use gunicorn with best practices for production
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "--workers", "3", "--access-logfile", "-", "sso_platform.wsgi:application"]
+# Use gunicorn with port 7860
+CMD ["gunicorn", "--bind", "0.0.0.0:7860", "--workers", "3", "--access-logfile", "-", "sso_platform.wsgi:application"]
